@@ -2,11 +2,11 @@ package search.bean;
 
 public class  Node<T> {
     private Comparable key;
-    private Comparable value;
+    private Integer value;
     private Node left;
     private Node right;
 
-    public Node(Comparable key, Comparable value) {
+    public Node(Comparable key, Integer value) {
         this.key = key;
         this.value = value;
         this.left = null;
@@ -21,11 +21,11 @@ public class  Node<T> {
         this.key = key;
     }
 
-    public Comparable getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Comparable value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
