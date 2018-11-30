@@ -4,6 +4,7 @@ import search.bean.Node;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * 二分搜索树类
@@ -96,6 +97,37 @@ public class BST {
         } else {
             //等于根节点，返回
             return root;
+        }
+    }
+
+    public static boolean searchNoSeq(Comparable key, Node root, Stack stack) {
+        if (root == null) {
+            return false;
+        }
+        int compareResult = key.compareTo(root.getKey());
+        if (compareResult != 0) {
+            //不是当前节点，将当前节点入栈，如果有左节点，继续找，没有就找右边，右边也没有就出栈
+            stack.push(root);
+            if (searchNoSeq(key, root.getLeft(), stack)) {
+                //左边找到了
+                Node node = (Node) stack.pop();
+                System.out.print(node.getKey() + " ");
+                return true;
+            } else if (searchNoSeq(key, root.getRight(), stack)) {
+                //右边找到了
+                //System.out.print(key + " ");
+                Node node = (Node) stack.pop();
+                System.out.print(node.getKey() + " ");
+                return true;
+            } else {
+                //左右都没找到，告诉父节点，我这没有了
+                stack.pop();
+                return false;
+            }
+        } else {
+            //找到了
+            System.out.print(key + " ");
+            return true;
         }
     }
 
@@ -270,8 +302,18 @@ public class BST {
     }
 
     public static void main(String[] args) {
+        Node root = null;
+        String[] words = new String[]{"ab", "bc", "cd", "a", "bc", "a", "c", "cd", "ab", "ab", "a"};
+        //String[] words = FileUtil.getFileWord2Array("/home/kent/IdeaProjects/sort/src/search/resource/bible.txt");
+        for (String word : words) {
+            Node node = BST.search(word, root);
+            if (node == null) {
+                root = BST.insertNode(new Node(word, 1), root);
+            } else {
+                node.setValue(node.getValue() + 1);
+            }
+        }
 
-        //System.out.println(insertNode(new Node("test", 20), null).getValue());
     }
 
 }

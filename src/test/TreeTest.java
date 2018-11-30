@@ -7,6 +7,7 @@ import util.FileUtil;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Created by kent on 18-1-29.
@@ -26,10 +27,15 @@ public class TreeTest {
         }
         BST.preOrder(root);
         System.out.println();
-        BST.levelOrder(root);
+
+        Stack<Node> nodes = new Stack<>();
+        BST.searchNoSeq("c", root, nodes);
+        System.out.println();
+
+        //BST.levelOrder(root);
         /*System.out.println(words.length);
         System.out.println(BST.count);
         System.out.println(BST.search("god", root).getValue());*/
-        System.out.println();
+        //System.out.println();
     }
 }
